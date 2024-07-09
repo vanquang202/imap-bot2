@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('run:job-make-mail')->everySecond();
+        $schedule->command('run:job-make-mail')->veryTwoSeconds();
     }
 
     /**
