@@ -18,12 +18,14 @@ class JobMakeMail extends Command
         $dataIds = array_reverse($dataIds);
         foreach ($dataIds as $key => $id) {
             $dataMail = $mailbox->getMail($id);
-            $MailImap::create([
-                "mail_id" => $dataMail->id,
-                "mail_to" => $dataMail->toString,
-                "date" => $dataMail->date,
-                "text_html" => $dataMail->textHtml
-            ]);
+            if (!$MailImap::where("mail_id", $dataMail->id)->first()) {
+                $MailImap::create([
+                    "mail_id" => $dataMail->id,
+                    "mail_to" => $dataMail->toString,
+                    "date" => $dataMail->date,
+                    "text_html" => $dataMail->textHtml
+                ]);
+            }
         }
         return COMMAND::SUCCESS;
     }
